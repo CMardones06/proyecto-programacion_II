@@ -18,6 +18,7 @@ Aún no hay programa así que aún no hay instrucciones :b
 ## Distribución de tareas:
 
 | Área | Catalina Ojeda: Operaciones y cobros | Camila Mardones: Persistencia, consultas y reportes |
+|---|---|---|
 | Lógica en Python | Implementa la clase abstracta y las tres modalidades de cobro, con atributos privados, getters, setters y cálculo polimórfico. Programa el registro de vehículos, los ingresos, las salidas y la contratación mensual. Valida ingresos duplicados, vigencia y superposición de suscripciones. | Implementa los modelos de vehículo, estadía, suscripción y pago en SQLAlchemy, con sus relaciones y restricciones. Configura SQLite, la creación de tablas y el manejo de commit() y rollback(). Implementa las consultas de vehículos presentes, historial y pagos. |
 | Tkinter | Implementa los formularios para registrar vehículos, ingresos, salidas y suscripciones. Muestra el monto al cerrar una estadía y agrega mensajes de confirmación y error. | Implementa las tablas de vehículos presentes e historial de estadías y pagos, los filtros por patente, fecha y modalidad, y la vista de recaudación total y por modalidad. | 
 | Programación Funcional | Revisar junto a Camila que el reporte coincida con los cobros que generan las operaciones. | Implementa filter, map, reduce y lambda en las consultas y reportes. Dos funciones puras pueden ser filtrar pagos por período y modalidad y sumar los montos de los pagos recibidos. El reporte usa la fecha de registro del pago. |
