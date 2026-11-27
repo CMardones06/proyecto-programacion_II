@@ -194,3 +194,24 @@ class Estadia:
         self.__monto_pagado = monto
         self.__activa = False
         return monto
+
+# --- CREACIÓN FUNCIÓN validar_ingreso_permitido  ---
+
+def validar_ingreso_permitido(patente, estadias_activas: list[Estadia]):
+    patente_limpia = patente.strip().upper()
+    
+    for estadia in estadias_activas:
+        if estadia.patente == patente_limpia and estadia.activa:
+            raise ValueError(f"El vehículo con patente {patente_limpia} ya tiene una estadía activa.")
+
+
+# --- CREACIÓN FUNCIÓN validar_suscripcion_nueva ---
+
+def validar_suscripcion_nueva(patente, fecha_inicio: datetime, suscripciones_existentes: list[Suscripcion]):
+    patente_limpia = patente.strip().upper()
+    fecha_fin_nueva = fecha_inicio + timedelta(days=30)
+    
+    for sub in suscripciones_existentes:
+        if sub.patente == patente_limpia:
+            if not (fecha_fin_nueva <= sub.fecha_inicio or fecha_inicio >= sub.fecha_fin):
+                raise ValueError(f"El vehículo {patente_limpia} ya posee una suscripción en ese período.")
