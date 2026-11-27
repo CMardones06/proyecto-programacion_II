@@ -2,15 +2,13 @@
 
 "Una empresa necesita una aplicación de escritorio que permita administrar el ingreso y la salida de
 vehículos de un estacionamiento, calcular sus cobros y consultar los ingresos obtenidos. La empresa
-ofrece tres modalidades de pago: por minuto, diaria y mensual.Una empresa necesita una aplicación de escritorio que permita administrar el ingreso y la salida de
-vehículos de un estacionamiento, calcular sus cobros y consultar los ingresos obtenidos. La empresa
 ofrece tres modalidades de pago: por minuto, diaria y mensual."
 
 ## Instrucciones de ejecución e instalación:
 
 Aún no hay programa así que aún no hay instrucciones :b 
 
-## Intrgrantes y usuarios de GitHub:
+## Integrantes y usuarios de GitHub:
 
 - Camila Mardones | CMardones06
 - Catalina Ojeda | c-ojeda
@@ -43,6 +41,11 @@ Aún no hay programa así que aún no hay instrucciones :b
 
 No definidas
 
-### Ejemplos de uso:
+### Ejemplos de uso: | FALTA TERMINAR
 
-No hechos ni definidos
+1. **Registro del vehículo:** Ingresar la patente, nombre del responsable y contacto.
+2. **Ingreso al estacionamiento:** Seleccionar la patente puesta anteriormente, elegir la modalidad(si no posee suscripción vigente) y confirmar la entrada.
+3. **Salida y cobro:** SUPONIENDO: Al retirarse, seleccionar la patente ocupada anteriormente y AÚN NO HAY INTERFAZ GRÁFICA. El sistema calculará el tiempo transcurrido (ej. 1 minuto y 10 segundos = 2 minutos) y mostrará el total a pagar , registrando el pago automáticamente.
+4. **Consulta de recaudación:** NO SABO
+
+
