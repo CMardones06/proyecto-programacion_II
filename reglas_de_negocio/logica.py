@@ -152,3 +152,45 @@ class Suscripcion:
 
     def esta_vigente(self, fecha_referencia: datetime) -> bool:
         return self.__fecha_inicio <= fecha_referencia < self.__fecha_fin
+
+# --- CREACIÓN CLASE SUSCRIPCION ---
+
+class Estadia:
+    def __init__(self, patente, modalidad: ModalidadCobro, fecha_ingreso):
+        self.patente = patente
+        self.__modalidad = modalidad
+        self.__fecha_ingreso = fecha_ingreso
+        self.__fecha_salida = None
+        self.__monto_pagado = None
+        self.__activa = True
+
+    @property
+    def modalidad(self) -> ModalidadCobro:
+        return self.__modalidad
+
+    @property
+    def fecha_ingreso(self) -> datetime:
+        return self.__fecha_ingreso
+
+    @property
+    def fecha_salida(self) -> datetime:
+        return self.__fecha_salida
+
+    @property
+    def monto_pagado(self):
+        return self.__monto_pagado
+
+    @property
+    def activa(self) -> bool:
+        return self.__activa
+
+    def finalizar_estadia(self, fecha_salida: datetime) -> int:
+        if not self.__activa:
+            raise ValueError("Esta estadía ya fue finalizada.")
+        
+        monto = self.__modalidad.calcular_importe(self.__fecha_ingreso, fecha_salida)
+        
+        self.__fecha_salida = fecha_salida
+        self.__monto_pagado = monto
+        self.__activa = False
+        return monto
