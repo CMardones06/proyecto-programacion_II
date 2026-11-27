@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import datetime, timedelta
 import math
 
 class ModalidadCobro(ABC):
@@ -111,3 +111,44 @@ class Vehiculo:
         if not valor or not valor.strip():
             raise ValueError("El contacto del responsable no puede estar vacío.")
         self.__contacto_responsable = valor.strip()
+
+# --- CREACIÓN CLASE SUSCRIPCION ---
+
+class Suscripcion:
+    def __init__(self, patente: str, fecha_inicio: datetime, tarifa_pago: int):
+        self.patente = patente
+        self.fecha_inicio = fecha_inicio
+        self.__fecha_fin = fecha_inicio + timedelta(days=30)
+        self.__tarifa_pago = tarifa_pago
+
+    @property
+    def patente(self):
+        return self.__patente
+
+    @property
+    def fecha_inicio(self):
+        return self.__fecha_inicio
+
+    @property
+    def fecha_fin(self):
+        return self.__fecha_fin
+
+    @property
+    def tarifa_pago(self):
+        return self.__tarifa_pago
+
+    @patente.setter
+    def patente(self, valor: str):
+        valida = valor.strip().upper()
+        if not valida:
+            raise ValueError("La patente no puede estar vacía.")
+        self.__patente = valida
+
+    @tarifa_pago.setter
+    def tarifa_pago(self, valor: int):
+        if valor <= 0:
+            raise ValueError("El pago de la suscripción debe ser positivo.")
+        self.__tarifa_pago = valor
+
+    def esta_vigente(self, fecha_referencia: datetime) -> bool:
+        return self.__fecha_inicio <= fecha_referencia < self.__fecha_fin
