@@ -68,3 +68,46 @@ class CobroMensual(ModalidadCobro):
             raise ValueError("La fecha de salida no puede ser anterior al ingreso.")
         # Las estadías cubiertas por suscripción no generan cobro adicional al salir
         return 0
+
+# --- CREACIÓN CLASE VEHICULO ---
+
+class Vehiculo:
+    def __init__(self, patente: str, nombre_responsable: str, contacto_responsable: str):
+        # Al asignar aquí, Python redirige el valor al setter automáticamente
+        self.patente = patente
+        self.nombre_responsable = nombre_responsable
+        self.contacto_responsable = contacto_responsable
+
+    # --- ATRIBUTO PATENTE ---
+    @property
+    def patente(self) -> str:
+        return self.__patente
+
+    @patente.setter
+    def patente(self, valor: str):
+        p_valida = valor.strip().upper()  # ¡Llama al método con ()!
+        if not p_valida:
+            raise ValueError("La patente no puede estar vacía.")
+        self.__patente = p_valida
+
+    # --- ATRIBUTO NOMBRE RESPONSABLE ---
+    @property
+    def nombre_responsable(self) -> str:
+        return self.__nombre_responsable
+
+    @nombre_responsable.setter
+    def nombre_responsable(self, valor: str):
+        if not valor or not valor.strip():
+            raise ValueError("El nombre del responsable no puede estar vacío.")
+        self.__nombre_responsable = valor.strip()
+
+    # --- ATRIBUTO CONTACTO RESPONSABLE ---
+    @property
+    def contacto_responsable(self) -> str:
+        return self.__contacto_responsable
+
+    @contacto_responsable.setter
+    def contacto_responsable(self, valor: str):
+        if not valor or not valor.strip():
+            raise ValueError("El contacto del responsable no puede estar vacío.")
+        self.__contacto_responsable = valor.strip()
