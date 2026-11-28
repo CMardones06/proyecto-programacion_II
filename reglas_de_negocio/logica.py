@@ -66,14 +66,12 @@ class CobroMensual(ModalidadCobro):
     def calcular_importe(self, fecha_ingreso: datetime, fecha_salida: datetime) -> int:
         if fecha_salida < fecha_ingreso:
             raise ValueError("La fecha de salida no puede ser anterior al ingreso.")
-        # Las estadías cubiertas por suscripción no generan cobro adicional al salir
         return 0
 
 # --- CREACIÓN CLASE VEHICULO ---
 
 class Vehiculo:
     def __init__(self, patente: str, nombre_responsable: str, contacto_responsable: str):
-        # Al asignar aquí, Python redirige el valor al setter automáticamente
         self.patente = patente
         self.nombre_responsable = nombre_responsable
         self.contacto_responsable = contacto_responsable
@@ -85,10 +83,9 @@ class Vehiculo:
 
     @patente.setter
     def patente(self, valor: str):
-        p_valida = valor.strip().upper()  # ¡Llama al método con ()!
-        if not p_valida:
+        if not valor or not valor.strip():
             raise ValueError("La patente no puede estar vacía.")
-        self.__patente = p_valida
+        self.__patente = valor.strip().upper()
 
     # --- ATRIBUTO NOMBRE RESPONSABLE ---
     @property
@@ -112,37 +109,36 @@ class Vehiculo:
             raise ValueError("El contacto del responsable no puede estar vacío.")
         self.__contacto_responsable = valor.strip()
 
-# --- CREACIÓN CLASE SUSCRIPCION ---
+ # --- CREACIÓN CLASE Suscripcion  ---
 
 class Suscripcion:
     def __init__(self, patente: str, fecha_inicio: datetime, tarifa_pago: int):
-        self.patente = patente
-        self.fecha_inicio = fecha_inicio
+        self.patente = patente            
+        self.tarifa_pago = tarifa_pago    
+        self.__fecha_inicio = fecha_inicio
         self.__fecha_fin = fecha_inicio + timedelta(days=30)
-        self.__tarifa_pago = tarifa_pago
 
     @property
-    def patente(self):
+    def patente(self) -> str:
         return self.__patente
-
-    @property
-    def fecha_inicio(self):
-        return self.__fecha_inicio
-
-    @property
-    def fecha_fin(self):
-        return self.__fecha_fin
-
-    @property
-    def tarifa_pago(self):
-        return self.__tarifa_pago
 
     @patente.setter
     def patente(self, valor: str):
-        valida = valor.strip().upper()
-        if not valida:
+        if not valor or not valor.strip():
             raise ValueError("La patente no puede estar vacía.")
-        self.__patente = valida
+        self.__patente = valor.strip().upper()
+
+    @property
+    def fecha_inicio(self) -> datetime:
+        return self.__fecha_inicio
+
+    @property
+    def fecha_fin(self) -> datetime:
+        return self.__fecha_fin
+
+    @property
+    def tarifa_pago(self) -> int:
+        return self.__tarifa_pago
 
     @tarifa_pago.setter
     def tarifa_pago(self, valor: int):
@@ -153,16 +149,27 @@ class Suscripcion:
     def esta_vigente(self, fecha_referencia: datetime) -> bool:
         return self.__fecha_inicio <= fecha_referencia < self.__fecha_fin
 
-# --- CREACIÓN CLASE SUSCRIPCION ---
+
+# --- CREACIÓN CLASE Estadia ---
 
 class Estadia:
-    def __init__(self, patente, modalidad: ModalidadCobro, fecha_ingreso):
-        self.patente = patente
+    def __init__(self, patente: str, modalidad: ModalidadCobro, fecha_ingreso: datetime):
+        self.patente = patente            
         self.__modalidad = modalidad
         self.__fecha_ingreso = fecha_ingreso
         self.__fecha_salida = None
         self.__monto_pagado = None
         self.__activa = True
+
+    @property
+    def patente(self) -> str:
+        return self.__patente
+
+    @patente.setter
+    def patente(self, valor: str):
+        if not valor or not valor.strip():
+            raise ValueError("La patente no puede estar vacía.")
+        self.__patente = valor.strip().upper()
 
     @property
     def modalidad(self) -> ModalidadCobro:
@@ -177,7 +184,7 @@ class Estadia:
         return self.__fecha_salida
 
     @property
-    def monto_pagado(self):
+    def monto_pagado(self) -> int:
         return self.__monto_pagado
 
     @property
